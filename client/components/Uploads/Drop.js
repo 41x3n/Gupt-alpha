@@ -1,28 +1,34 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useState, useCallback } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFile, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { useDropzone } from "react-dropzone";
-import { DropContainer } from "../../styles/Drop.styles";
+import dropStyles from "../../styles/Drop.module.css";
 import listStyles from "../../styles/FileList.module.css";
 
 const Drop = () => {
   const [files, setFiles] = useState([]);
+  console.log(files);
   const onDrop = useCallback((acceptedFiles) => {
-    console.log(acceptedFiles);
+    setFiles(acceptedFiles);
+    //console.log(acceptedFiles);
   }, []);
 
-  const {
-    acceptedFiles,
-    fileRejections,
-    getRootProps,
-    getInputProps,
-    isDragActive,
-    isDragAccept,
-    isDragReject,
-  } = useDropzone({ onDrop, maxSize: 5242880 });
+  const { acceptedFiles, fileRejections, getRootProps, getInputProps } =
+    useDropzone({ onDrop, maxSize: 5242880 });
 
   //todo: Accepted Files
   const acceptedFileItems = acceptedFiles.map((file) => (
     <li key={file.path}>
-      {file.path} - {file.size} bytes
+      <FontAwesomeIcon icon={faFile} height={10} width={10} /> &nbsp;
+      {file.name}
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          alert("File will be deleted");
+        }}
+      >
+        <FontAwesomeIcon icon={faTrashAlt} height={10} width={10} />
+      </button>
     </li>
   ));
 
@@ -36,13 +42,13 @@ const Drop = () => {
     );
   });
 
-  useEffect(
-    () => () => {
-      // Make sure to revoke the data uris to avoid memory leaks
-      files.forEach((file) => URL.revokeObjectURL(file.preview));
-    },
-    [files]
-  );
+  // useEffect(
+  //   () => () => {
+  //     // Make sure to revoke the data uris to avoid memory leaks
+  //     files.forEach((file) => URL.revokeObjectURL(file.preview));
+  //   },
+  //   [files]
+  // );
 
   //todo: onSubmit function
   const onSubmit = async (e) => {
@@ -72,12 +78,13 @@ const Drop = () => {
     <div className="glass">
       <h3>Upload Files</h3>
       <div className="container">
-        <DropContainer
-          {...getRootProps(isDragActive, isDragAccept, isDragReject)}
+        <div
+          className={dropStyles.dropContainer}
+          {...getRootProps({ className: "dropzone" })}
         >
           <input {...getInputProps()} />
           <p>Drag n Drop</p>
-        </DropContainer>
+        </div>
         <aside>
           <h4>Uploaded Files</h4>
           <div>
