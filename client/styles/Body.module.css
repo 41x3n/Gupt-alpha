@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Text&display=swap");
+
+.bodyContainer {
+  overflow: hidden;
+  width: 68%;
+  display: flex;
+  justify-content: space-between;
+  margin: 80px auto;
+  /* border: 2px solid #fff; */
+  box-sizing: border-box;
+  /* border-radius: 2rem; */
+}
+
+.glass {
+  height: 550px;
+  width: 50%;
+  padding-top: 100px;
+  padding-left: 10rem;
+  background: rgba(255, 255, 255, 0.1);
+  /* color: #000;*/
+  border-bottom-left-radius: 25px;
+  border-top-left-radius: 25px;
+  z-index: 2;
+  backdrop-filter: blur(13px);
+}
+
+.circle1,
+.circle2 {
+  height: 5rem;
+  width: 5rem;
+  background-color: rgba(255, 220, 151);
+  position: absolute;
+  border-radius: 50%;
+}
+
+.circle1 {
+  top: 30%;
+  right: 53%;
+  /* background-color: rgba(255,220,151); */
+}
+
+.circle2 {
+  bottom: 8%;
+  left: 16%;
+}
+
+.textContainer {
+  background-image: url("../public/rg.svg");
+  background-size: initial;
+  height: 550px;
+  width: 50%;
+  padding-top: 150px;
+  padding-left: 50px;
+  background-color: #07003b;
+  /* border: 2px solid #fff; */
+  border-bottom-right-radius: 25px;
+  border-top-right-radius: 25px;
+}
+.keyFeatures {
+  font-family: -apple-system, "DM Serif Text", serif;
+  font-size: 26px;
+}
+.p {
+  font-family: -apple-system, "DM Serif Text", serif;
+  font-size: 36px;
+}
+
+.webrtcContainer {
+  width: 68%;
+  margin-top: 10%;
+  margin-left: 16.7%; /*280px*/
+  display: flex;
+  justify-content: space-between;
+  /* border: 2px solid #fff; */
+  box-sizing: border-box;
+}
+
+.textContainerReverse {
+  background-image: url("../public/rg.svg");
+  background-size: initial;
+  height: 550px;
+  width: 50%;
+  padding-top: 150px;
+  padding-left: 50px;
+  background-color: #07003b;
+  /* border: 2px solid #fff; */
+  border-bottom-left-radius: 25px;
+  border-top-left-radius: 25px;
+}
+
+.glassReverse {
+  height: 550px;
+  width: 50%;
+  padding-top: 150px;
+  padding-left: 150px;
+  background: rgba(255, 255, 255, 0.1);
+  border-bottom-right-radius: 25px;
+  border-top-right-radius: 25px;
+  z-index: 2;
+  backdrop-filter: blur(13px);
+}

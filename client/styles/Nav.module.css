@@ -1,0 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
+.container {
+  /* border: 2px solid #fff; */
+  box-sizing: border-box;
+}
+.navContainer {
+  height: 70px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 100px;
+}
+
+.logoContainer {
+  height: 100%;
+  padding: 25px;
+}
+
+.logoTypeContainer {
+  height: 100%;
+  width: -20px;
+  padding: 50px;
+  font-family: -apple-system, "Quicksand", sans-serif;
+}
+
+.optionsContainer {
+  height: 100%;
+  width: 590px;
+  padding: 65px;
+  display: flex;
+  align-items: space-between;
+  justify-content: flex-end;
+  font-family: --apple-system, "Varela Round", sans-serif;
+  font-size: 20px;
+}
+
+.optionLink {
+  padding: 10px 15px;
+  cursor: pointer;
+  align-items: space-between;
+}
