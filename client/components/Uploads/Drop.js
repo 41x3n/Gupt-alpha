@@ -1,12 +1,16 @@
-import React, { useState, useCallback } from "react";
+import { useState, useCallback } from "react";
+
+import { useDropzone } from "react-dropzone";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFile, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
-import { useDropzone } from "react-dropzone";
+
 import dropStyles from "../../styles/Drop.module.css";
 import listStyles from "../../styles/FileList.module.css";
 
 const Drop = () => {
   const [files, setFiles] = useState([]);
+  const [downloadFile, setDownloadFile] = useState([]);
+
   console.log(files);
   const onDrop = useCallback((acceptedFiles) => {
     setFiles(acceptedFiles);
@@ -67,12 +71,15 @@ const Drop = () => {
       });
       console.log(res);
       if (res.status === 200) {
+        setDownloadFile(res.data);
         console.log("File Uploaded");
       }
     } catch (err) {
       console.log(err);
     }
   };
+
+  const downloadFiles = () => {};
 
   return (
     <div className="glass">
@@ -97,6 +104,8 @@ const Drop = () => {
         <from onSubmit={onSubmit}>
           <input type="submit" value="Upload" />
         </from>
+        &nbsp; &nbsp;
+        <button onClick={downloadFiles}>Download</button>
       </div>
     </div>
   );

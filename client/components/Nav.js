@@ -1,46 +1,65 @@
-import Image from "next/image";
-import Link from "next/Link";
+import Image from 'next/image';
+import Link from 'next/Link';
 
-import logoMark from "../public/logo_mark.svg";
-import navStyles from "../styles/Nav.module.css";
-
-const Nav = ({}) => {
+//import logoMark from '../public/assets/ogo_mark.svg';
+//import navStyles from '../styles/Nav.module.css';
+const Nav = () => {
   return (
-    <>
-      <header>
-        <div className={navStyles.container}>
-          <nav className={navStyles.navContainer}>
-            <div className={navStyles.logoContainer}>
-              <Link href="/">
-                <Image src={logoMark} width={100} height={100} />
+    <div className="container-fluid">
+      <nav
+        className="navbar navbar-expand-lg row mx-auto"
+        style={{ background: '#fff' }}
+      >
+        <a className="navbar-brand d-flex justify-content-around px-2" href="#">
+          <Image
+            src="/assets/logo1.svg"
+            alt="logo"
+            // className="d-flex"
+            width={50}
+            height={50}
+          />
+          <div className="h1 text m-2" style={{ color: 'black' }}>
+            GUPT
+          </div>
+        </a>
+        {/* <div className="justify-cofntent-start align-items-center">Gupt</div> */}
+        <button
+          className="navbar-toggler navbar-toggler-right navbar-light bg-light"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div
+          className="collapse navbar-collapse justify-content-end "
+          id="navbarNav"
+        >
+          <ul className="navbar-nav text-black">
+            <li className="nav-item">
+              <Link className="nav-link" href="/team">
+                Team
               </Link>
-            </div>
-            <div className={navStyles.logoTypeContainer}>
-              <h1>GUPT</h1>
-            </div>
-            <div className={navStyles.optionsContainer}>
-              <div className={navStyles.optionLink}>
-                {" "}
-                <Link href="/team">Team</Link>{" "}
-              </div>
-              <div className={navStyles.optionLink}>
-                {" "}
-                <Link href="/signin" className={navStyles.optionLink}>
-                  Sign In
-                </Link>{" "}
-              </div>
-              <div className={navStyles.optionLink}>
-                {" "}
-                <Link href="/signup" className={navStyles.optionLink}>
-                  Sign Up
-                </Link>{" "}
-              </div>
-            </div>
-          </nav>
+            </li>
+            &nbsp; &nbsp;
+            <li className="nav-item">
+              <Link className="nav-link" href="/signup">
+                SignUp
+              </Link>
+            </li>
+            &nbsp; &nbsp;
+            <li className="nav-item">
+              <Link className="nav-link" href="/signin">
+                SignIn
+              </Link>
+            </li>
+            &nbsp; &nbsp;
+          </ul>
         </div>
-      </header>
-    </>
+      </nav>
+    </div>
   );
 };
-
 export default Nav;
