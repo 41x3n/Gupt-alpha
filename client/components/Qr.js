@@ -40,7 +40,7 @@ const ScanQr = () => {
             overlay: {
               width: "60%",
               height: "75%",
-              left: "10%",
+              left: "15%",
               marginTop: "5%",
             },
           }}
