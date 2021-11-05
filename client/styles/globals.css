@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&family=Rubik:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@500&family=Rubik:wght@300&display=swap");
 html,
 body {
   padding: 0;
@@ -10,7 +10,7 @@ body {
 
 #__next {
   background-color: #fff;
-  color: 'black';
+  color: "black";
   /* object-fit: fill; */
   position: absolute;
   top: 0;
@@ -19,7 +19,10 @@ body {
   right: 0;
 }
 
-.btn {
+#dropzone-bg {
+  color: #fff;
+}
+#btn-upload {
   border: 1px solid #fe4167;
   border-radius: 22px;
   width: 120px;
@@ -27,7 +30,44 @@ body {
   text-align: center;
 }
 
-.btn:hover {
+#btn-clipboard {
+  border: 1px solid #fe4167;
+  border-radius: 22px;
+  width: 120px;
+  height: 37px;
+  text-align: center;
+}
+
+#btn-scan {
+  border: 1px solid #fe4167;
+  border-radius: 22px;
+  width: 120px;
+  height: 37px;
+  text-align: center;
+}
+
+#btn-close {
+  border: 1px solid #fe4167;
+  width: 36.5px;
+  height: 37px;
+  text-align: center;
+}
+
+#download-qr {
+  border: 1px solid #fe4167;
+  border-radius: 22px;
+  width: 120px;
+  height: 37px;
+  text-align: center;
+}
+
+#downloadqr-logo {
+  width: 25px;
+  height: 25px;
+  color: #fe4167;
+}
+
+#btn-upload:hover {
   width: 120px;
   height: 37px;
   background: #fd5375;
@@ -35,8 +75,47 @@ body {
   border-radius: 22px;
 }
 
+#btn-clipboard:hover {
+  width: 120px;
+  height: 37px;
+  background: #fd5375;
+  color: #fff;
+  border-radius: 22px;
+}
+
+#btn-scan:hover {
+  width: 120px;
+  height: 37px;
+  background: #fd5375;
+  color: #fff;
+  border-radius: 22px;
+}
+
+#btn-close:hover {
+  border: 1px solid #fe4167;
+  width: 36.5px;
+  height: 37px;
+  background: #fd5375;
+  color: #fff;
+  text-align: center;
+}
+#download-qr:hover {
+  width: 120px;
+  height: 37px;
+  background: #fd5375;
+  color: #fff;
+  border-radius: 22px;
+}
+
+#downloadqr-logo:hover {
+  width: 25px;
+  height: 25px;
+  background: #fd5375;
+  color: #fff;
+}
+
 .text {
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
 }
 
 a {

@@ -1,25 +1,27 @@
-import { useState, useCallback } from 'react';
-import Modal from 'react-modal';
-import QRCode from 'qrcode.react';
+import { useState } from "react";
+import Modal from "react-modal";
+import QRCode from "qrcode.react";
 // import QRCode from 'qrcode';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faQrcode } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faQrcode, faDownload } from "@fortawesome/free-solid-svg-icons";
 
 const ScanQr = () => {
-  // const [text, setText] = useState('');
-  // const [imageUrl, setImageUrl] = useState('');
-  const [value, setValue] = useState('http://google.com');
-
+  const [value, setValue] = useState("http://google.com");
   const [modalOpen, setModalOpen] = useState(false);
 
-  const generateQrCode = async () => {
-    try {
-      const res = await QRCode.toDataURL(text);
-      setImageUrl(res);
-    } catch (error) {
-      console.log(error);
-    }
+  const downloadQR = () => {
+    const canvas = document.getElementById("canvas");
+    const pngUrl = canvas
+      .toDataURL("image/png")
+      .replace("image/png", "image/octet-stream");
+
+    let downloadLink = document.createElement("a");
+    downloadLink.href = pngUrl;
+    downloadLink.download = "qr.png";
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
   };
 
   return (
@@ -36,41 +38,43 @@ const ScanQr = () => {
           isOpen={modalOpen}
           style={{
             overlay: {
-              width: '980px',
-              height: '800px',
-              left: '100px',
-              marginTop: '50px',
+              width: "60%",
+              height: "75%",
+              left: "10%",
+              marginTop: "5%",
             },
           }}
         >
           <button
-            className="btn btn-danger"
+            id="btn-close"
+            className="btn"
             onClick={() => setModalOpen(false)}
             style={{
-              display: 'flex',
-              flexDirection: 'column',
-              marginLeft: '97%',
+              display: "flex",
+              flexDirection: "column",
+              marginLeft: "95%",
             }}
           >
             X
           </button>
           <center>
-            <QRCode
-              value={value}
-              style={{ width: '200px', height: '200px', marginTop: '150px' }}
-            />
+            <>
+              <QRCode
+                id="canvas"
+                value={value}
+                style={{ width: "200px", height: "200px", marginTop: "150px" }}
+              />
+              <br />
+              <br />
+              <button id="download-qr" className="btn" onClick={downloadQR}>
+                <FontAwesomeIcon
+                  id="downloadqr-logo"
+                  icon={faDownload}
+                  style={{ width: "25px", height: "25px" }}
+                />
+              </button>{" "}
+            </>
           </center>
-          {/* <input onChange={(e) => setText(e.target.value)} />
-          <button className="btn btn-primary" onClick={() => generateQrCode()}>
-            Generate
-          </button>
-          <br />
-          <br />
-          {imageUrl ? (
-            <a href={imageUrl} download>
-              <img src={imageUrl} alt="img" />
-            </a>
-          ) : null} */}
         </Modal>
       </center>
     </div>
