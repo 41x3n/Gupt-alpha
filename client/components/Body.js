@@ -1,13 +1,13 @@
-import Drop from './Drop';
+import Drop from "./Drop";
 //import bodyStyles from '../../styles/Body.module.css';
 const Body = () => {
   return (
     <div
       className="container-fluid py-5"
       style={{
-        color: 'white',
+        color: "white",
         // marginTop: '100px',
-        maxWidth: '800px',
+        maxWidth: "800px",
       }}
     >
       <div className="row">
@@ -17,9 +17,12 @@ const Body = () => {
         <div className="col-sm py-2">
           <div
             style={{
-              color: 'black',
-              fontSize: '40px',
-              textTransform: 'uppercase',
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              color: "black",
+              fontSize: "40px",
+              textTransform: "uppercase",
             }}
           >
             Encrypted

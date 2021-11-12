@@ -1,34 +1,64 @@
-import copy from 'copy-to-clipboard';
-import { useState } from 'react';
+import { useState } from "react";
+import copy from "copy-to-clipboard";
+import FontAwesomeIcon from "@fortawesome/react-fontawesome";
+import { faCopy } from "@fortawesome/free-solid-svg-icons";
+import Qr from "./Qr";
 
-const Clipboard = ({}) => {
-  const [copyText, setCopyText] = useState('http://google.com');
+const Clipboard = () => {
+  const [copyText, setCopyText] = useState("http://google.com");
 
   const copyToClipboard = () => {
     copy(copyText);
-    alert('Link Copied');
+    alert("Link Copied");
   };
   return (
-    <div>
-      <center>
+    <>
+      <div
+        className="d-flex flex-column align-items-center"
+        style={{ padding: "50px" }}
+      >
         <input
           type="text"
           value={copyText}
           style={{
-            border: '1px solid #FE4167',
-            borderRadius: '5px',
-            width: '150px',
-            height: '37px',
-            textAlign: 'center',
+            border: "1px solid #FE4167",
+            borderRadius: "5px",
+            width: "100%",
+            height: "37px",
+            textAlign: "center",
           }}
           readOnly
         />
-        &nbsp; &nbsp;
-        <button id="btn-clipboard" className="btn" onClick={copyToClipboard}>
-          Copy Link
-        </button>
-      </center>
-    </div>
+        <div className="d-flex flex-row justify-content-center">
+          <div
+            style={{
+              width: "50%",
+              height: "50%",
+              minHeight: "37px",
+              margin: "2%",
+            }}
+          >
+            <button
+              id="btn-clipboard"
+              className="btn"
+              onClick={copyToClipboard}
+            >
+              Copy Link
+            </button>
+          </div>
+          <div
+            style={{
+              width: "50%",
+              height: "50%",
+              minHeight: "37px",
+              margin: "2%",
+            }}
+          >
+            <Qr />
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 
