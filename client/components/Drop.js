@@ -24,6 +24,7 @@ const Drop = () => {
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
+    maxFiles: 5,
     maxSize: 5242880,
   });
 
