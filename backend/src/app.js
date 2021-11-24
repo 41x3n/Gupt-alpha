@@ -8,7 +8,12 @@ const downloadRouter = require("../src/routes/download");
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors());
+
+const corsOptions = {
+  exposedHeaders: "Content-Disposition",
+};
+
+app.use(cors(corsOptions));
 
 console.log("Starting up..");
 try {
