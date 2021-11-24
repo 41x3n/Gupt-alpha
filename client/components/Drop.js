@@ -8,12 +8,14 @@ import { faUpload, faFile } from "@fortawesome/free-solid-svg-icons";
 import Clipboard from "../Components/Clipboard";
 
 import listStyles from "../styles/FileList.module.css";
+import { uploadFileApi } from "../services/api";
 
 const Drop = () => {
   //Files
   const [myFiles, setMyFiles] = useState([]);
   // const [isUploaded, setIsUploaded] = useState(false);
   const [share, setShare] = useState(false);
+  const [id, setUploadDataId] = useState();
 
   const onDrop = useCallback(
     (acceptedFiles) => {
@@ -24,8 +26,8 @@ const Drop = () => {
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
-    maxFiles: 5,
-    maxSize: 5242880,
+    maxFiles: 1,
+    maxSize: 52428800,
   });
 
   const removeFile = (file) => () => {
@@ -56,24 +58,17 @@ const Drop = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    files.map((file, index) => {
-      formData.append(`file${index}`, file);
+    myFiles.map((file, index) => {
+      formData.append(`file`, file);
     });
 
-    try {
-      const res = await axios.post("", {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        body: formData,
-      });
-      console.log(res);
-      if (res.status === 200) {
-        setDownloadFile(res.data);
-        console.log("File Uploaded");
-      }
-    } catch (err) {
-      console.log(err);
+    let data = await uploadFileApi(formData);
+
+    console.log(data);
+
+    if (data.length > 0) {
+      setUploadDataId(data);
+      setShare(true);
     }
   };
 
@@ -133,14 +128,14 @@ const Drop = () => {
               type="submit"
               id="btn-upload"
               className="btn"
-              onClick={() => setShare(true)}
+              onClick={onSubmit}
             >
               UPLOAD
             </button>
           </div>
         </>
       ) : (
-        <Clipboard />
+        <Clipboard id={id} />
       )}
     </div>
   );
