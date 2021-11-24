@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const cors = require("cors");
 const mongoose = require("mongoose");
 const uploadRouter = require("../src/routes/upload");
 const downloadRouter = require("../src/routes/download");
@@ -7,6 +8,7 @@ const downloadRouter = require("../src/routes/download");
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cors());
 
 console.log("Starting up..");
 try {
