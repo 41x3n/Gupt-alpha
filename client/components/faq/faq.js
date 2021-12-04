@@ -9,42 +9,40 @@ const FAQ = () => {
     {
       id: 1,
       q1: "What is gupt exactly?",
-      a1: "tokenora is a community-first crypto initiative that aims to bring together crypto enthusiasts from all walks of life. whether you are a professional crypto maniac or someone who is following their curiosity, we want to serve them all.",
+      a1: "GUPT",
     },
     {
       id: 2,
       q1: "What end-to-end encryption?",
-      a1: `our mission is simple - helping everyone understand about crypto currency and everything that relates to it. \n
-    
-    we created tokenora because we believe decentralisation is the ultimate future, and to get everyone on board with it, we have to make ourselves familiar with it first. \n
-    at tokenora, we play the zero sum game. everyone grows. and that's what makes us special.`,
+      a1: `E2E`,
     },
     {
       id: 3,
       q1: "How can you use gupt?",
-      a1: "you can start by typing in your email and reserving a username.",
+      a1: "EAF",
     },
     {
       id: 4,
       q1: "Is this another social media app or something?",
-      a1: "Tokenora is a community-first crypto initiative that aims to bring together crypto enthusiasts from all walks of life. whether you are a professional crypto maniac or someone who is following their curiosity, we want to serve them all.",
+      a1: "Wormhole",
     },
   ];
   return (
     <div
       id="faq"
       className="d-flex flex-column align-items-center"
-      style={{ margin: "0 368px", width: "800px" }}
+      style={{ width: "800px" }}
     >
       <h5>FAQs</h5>
       {faqs.map((i) => {
         return (
           <div
             key={i.id}
-            className={`p-3 m-1 col-sm-2 col-md-9 col-sm-1 color-CECDE1 cursor-pointer ${
+            className={`p-3 m-1 col-sm-2 col-sm-7 co-sm-2 color-CECDE1 cursor-pointer ${
               faq === i.id ? "Opend" : "Not Opened"
             }`}
             onClick={() => setFaq(faq === i.id ? "" : i.id)}
+            style={{ background: "#FFC7C9", borderRadius: "10px" }}
           >
             <div className="d-flex justify-content-between align-items-center">
               <div>

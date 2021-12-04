@@ -3,12 +3,12 @@ import { useState } from "react";
 import copy from "copy-to-clipboard";
 // import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 // import { faCopy } from "@fortawesome/free-solid-svg-icons";
-import Qr from "./Qr";
-import { downloadFileApi } from "../services/api";
+import Qr from "../qr/Qr";
+import { downloadFileApi } from "../../services/api";
 
 const Clipboard = ({ id }) => {
   const [copyText, setCopyText] = useState(
-    `http://localhost:3000/api/download/${id}`
+    `http://localhost:3000/download/${id}`
   );
 
   const copyToClipboard = () => {

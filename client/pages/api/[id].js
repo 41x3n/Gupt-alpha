@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
-import Nav from "../../components/nav/Nav";
-import Loader from "../../components/loader/Loader";
-import Footer from "../../components/footer/Footer";
-import { downloadFileApi } from "../../services/api";
+import Nav from "../../../components/Nav";
+import Loader from "../../../components/DownloadPage/Loader";
+import Footer from "../../../components/Footer";
+import { downloadFileApi } from "../../../services/api";
 
 const download = ({ statusCode }) => {
   const router = useRouter();
