@@ -1,6 +1,6 @@
 import { BeatLoader } from "react-spinners";
 
-import loaderStyles from "../../styles/Loader.module.css";
+import loaderStyles from "../loader/Loader.module.css";
 
 const Loader = () => {
   return (

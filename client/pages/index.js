@@ -1,6 +1,6 @@
-import Nav from "../Components/Nav";
-import Body from "../Components/Body";
-import Footer from "../Components/Footer";
+import Nav from "../Components/nav/Nav";
+import Body from "../Components/body/Body";
+import Footer from "../Components/footer/Footer";
 
 export default function Home() {
   return (

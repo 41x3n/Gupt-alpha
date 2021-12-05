@@ -5,10 +5,10 @@ import { useDropzone } from "react-dropzone"; // Import React DropZone
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload, faFile } from "@fortawesome/free-solid-svg-icons";
 
-import Clipboard from "../Components/Clipboard";
+import Clipboard from "../clipboard/Clipboard";
 
-import listStyles from "../styles/FileList.module.css";
-import { uploadFileApi } from "../services/api";
+import listStyles from "../drop/FileList.module.css";
+import { uploadFileApi } from "../../services/api";
 
 const Drop = () => {
   //Files

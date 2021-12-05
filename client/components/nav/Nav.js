@@ -1,24 +1,22 @@
-import Image from 'next/image';
-import Link from 'next/Link';
+import Image from "next/image";
+import Link from "next/Link";
 
-//import logoMark from '../public/assets/ogo_mark.svg';
-//import navStyles from '../styles/Nav.module.css';
 const Nav = () => {
   return (
     <div className="container-fluid">
       <nav
         className="navbar navbar-expand-lg row mx-auto"
-        style={{ background: '#fff' }}
+        style={{ background: "#fff" }}
       >
         <a className="navbar-brand d-flex justify-content-around px-2" href="#">
           <Image
-            src="/assets/logo1.svg"
+            src="/assets/logo.svg"
             alt="logo"
             // className="d-flex"
             width={50}
             height={50}
           />
-          <div className="h1 text m-2" style={{ color: 'black' }}>
+          <div className="h1 text m-2" style={{ color: "black" }}>
             GUPT
           </div>
         </a>

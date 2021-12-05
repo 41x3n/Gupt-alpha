@@ -1,5 +1,5 @@
-import Drop from "./Drop";
-import FAQ from "./faq/faq";
+import Drop from "../drop/Drop";
+import FAQ from "../faq/faq";
 //import bodyStyles from '../../styles/Body.module.css';
 const Body = () => {
   return (
@@ -31,13 +31,10 @@ const Body = () => {
               <br /> Anonymous
               <br /> File Sharing
             </div>
-            {/* <h2>
-            Share Your files over encrypted network without getting tracked
-          </h2> */}
           </div>
         </div>
       </div>
-      <div>
+      <div className="container-fluid" style={{ maxWidth: "800px" }}>
         <FAQ />
       </div>
     </>
