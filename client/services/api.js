@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import axios from "axios";
 
 axios.defaults.baseURL = "http://localhost:5000";
@@ -30,6 +29,9 @@ export let uploadFileApi = async (data, headers) => {
 export let downloadFileApi = async (id) => {
   const response = await getCall(`/api/download/${id}`);
   const statusCode = response.status === 200 ? "OK" : response.status;
+  const filename = response.headers["content-disposition"];
+  console.log(response);
+  console.log(filename);
   console.log(response.data);
-  return statusCode;
+  return filename;
 };

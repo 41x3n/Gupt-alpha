@@ -4,7 +4,6 @@ import copy from "copy-to-clipboard";
 // import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 // import { faCopy } from "@fortawesome/free-solid-svg-icons";
 import Qr from "../qr/Qr";
-import { downloadFileApi } from "../../services/api";
 
 const Clipboard = ({ id }) => {
   const [copyText, setCopyText] = useState(

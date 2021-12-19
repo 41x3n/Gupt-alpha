@@ -4,11 +4,12 @@ import { useDropzone } from "react-dropzone"; // Import React DropZone
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload, faFile } from "@fortawesome/free-solid-svg-icons";
+import { SodiumPlus } from "sodium-plus";
 
 import Clipboard from "../clipboard/Clipboard";
 
-import listStyles from "../drop/FileList.module.css";
 import { uploadFileApi } from "../../services/api";
+import listStyles from "../drop/FileList.module.css";
 
 const Drop = () => {
   //Files
@@ -19,6 +20,7 @@ const Drop = () => {
 
   const onDrop = useCallback(
     (acceptedFiles) => {
+      console.log(acceptedFiles);
       setMyFiles([...myFiles, ...acceptedFiles]);
     },
     [myFiles]
@@ -58,8 +60,79 @@ const Drop = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    myFiles.map((file, index) => {
-      formData.append(`file`, file);
+    myFiles.map(async (file, index) => {
+      // console.log(file.size);
+      // console.log(file.name);
+      let buffer = await file.arrayBuffer();
+      console.log(buffer);
+      let unit8View = new Uint8Array(buffer);
+      console.log(unit8View);
+      console.log(new File([unit8View], `${file.name}`));
+
+      let sodium = await SodiumPlus.auto();
+      // console.log(sodium);
+
+      let aliceKeypair = await sodium.crypto_box_keypair();
+      let aliceSecret = await sodium.crypto_box_secretkey(aliceKeypair);
+      let alicePublic = await sodium.crypto_box_publickey(aliceKeypair);
+      let bobKeypair = await sodium.crypto_box_keypair();
+      let bobSecret = await sodium.crypto_box_secretkey(bobKeypair);
+      let bobPublic = await sodium.crypto_box_publickey(bobKeypair);
+
+      let plaintext = unit8View;
+      let nonce = await sodium.randombytes_buf(24);
+
+      let ciphertext = await sodium.crypto_box(
+        plaintext,
+        nonce,
+        aliceSecret,
+        bobPublic
+      );
+      console.log(ciphertext); //Unit8Array
+
+      // Blob Object
+      // let blob = new Blob([ciphertext], { type: "application/pdf" });
+      // console.log(blob);
+      // File Object
+      let filez = new File([ciphertext], `${file.name}`, {
+        type: "application/pdf",
+      });
+      console.log(filez);
+
+      formData.append(`file`, filez);
+
+      let decrypted = await sodium.crypto_box_open(
+        ciphertext,
+        nonce,
+        bobSecret,
+        alicePublic
+      );
+      console.log(decrypted);
+
+      console.log(new File([decrypted], `${file.name}`));
+
+      // let sodium = await SodiumPlus.auto();
+      // let key = await sodium.crypto_secretbox_keygen();
+      // let nonce = await sodium.randombytes_buf(24);
+      // let message = JSON.stringify(unit8View);
+      // console.log(message); // After stringify
+      // let decoder = new TextDecoder();
+
+      // let cipherText = await sodium.crypto_secretbox(message, nonce, key);
+      // let encryptedFile = decoder.decode(cipherText);
+      // console.log(encryptedFile);
+
+      // formData.append(`file`, file);
+      // let encoder = new TextEncoder();
+      // let decrypted = await sodium.crypto_secretbox_open(
+      //   cipherText,
+      //   nonce,
+      //   key
+      // );
+      // //console.log(decrypted.toString("utf-8"));
+
+      // let decryptedFile = decrypted.toString("utf-8");
+      // console.log(decryptedFile);
     });
 
     let data = await uploadFileApi(formData);
