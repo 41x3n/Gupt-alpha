@@ -19,8 +19,9 @@ const getCall = (url) => {
 };
 
 export let uploadFileApi = async (data, headers) => {
-  console.log({ data, headers });
+  // console.log({ data, headers });
   const response = await postCall("/api/upload", data, headers);
+  console.log(response);
   console.log(response.data);
   console.log(response.status);
   return response.data;

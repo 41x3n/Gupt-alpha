@@ -5,6 +5,7 @@ import { useDropzone } from "react-dropzone"; // Import React DropZone
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload, faFile } from "@fortawesome/free-solid-svg-icons";
 import { SodiumPlus } from "sodium-plus";
+import FileSaver, { saveAs } from "file-saver";
 
 import Clipboard from "../clipboard/Clipboard";
 
@@ -61,6 +62,7 @@ const Drop = () => {
     e.preventDefault();
     const formData = new FormData();
     myFiles.map(async (file, index) => {
+      console.log(file.name);
       // console.log(file.size);
       // console.log(file.name);
       let buffer = await file.arrayBuffer();
@@ -90,16 +92,14 @@ const Drop = () => {
       );
       console.log(ciphertext); //Unit8Array
 
-      // Blob Object
+      //Blob Object
       // let blob = new Blob([ciphertext], { type: "application/pdf" });
       // console.log(blob);
-      // File Object
-      let filez = new File([ciphertext], `${file.name}`, {
-        type: "application/pdf",
-      });
-      console.log(filez);
-
-      formData.append(`file`, filez);
+      //File Object
+      let blob = new File([ciphertext], `${file.name}`);
+      console.log(blob);
+      console.log(FileSaver.saveAs(blob));
+      // formData.append("file", blob);
 
       let decrypted = await sodium.crypto_box_open(
         ciphertext,
@@ -135,7 +135,9 @@ const Drop = () => {
       // console.log(decryptedFile);
     });
 
-    let data = await uploadFileApi(formData);
+    let data = await uploadFileApi(formData, {
+      "Content-Type": "multipart/form-data",
+    });
 
     console.log(data);
 
