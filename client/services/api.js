@@ -29,10 +29,8 @@ export let uploadFileApi = async (data, headers) => {
 
 export let downloadFileApi = async (id) => {
   const response = await getCall(`/api/download/${id}`);
-  const statusCode = response.status === 200 ? "OK" : response.status;
-  const filename = response.headers["content-disposition"];
-  console.log(response);
-  console.log(filename);
-  console.log(response.data);
-  return filename;
+  const disposition = response.headers["content-disposition"];
+  const header = disposition.split(";")[1];
+  const filename = header.split("=")[1];
+  return { response, filename };
 };

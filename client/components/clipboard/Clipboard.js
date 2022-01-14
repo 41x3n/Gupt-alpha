@@ -1,14 +1,16 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import copy from "copy-to-clipboard";
 // import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 // import { faCopy } from "@fortawesome/free-solid-svg-icons";
 import Qr from "../qr/Qr";
 
-const Clipboard = ({ id }) => {
-  const [copyText, setCopyText] = useState(
-    `http://localhost:3000/download/${id}`
-  );
+const Clipboard = ({ token }) => {
+  const [copyText, setCopyText] = useState("");
+
+  useEffect(() => {
+    setCopyText(`http://localhost:3000/download/${token}`);
+  }, [token]);
 
   const copyToClipboard = () => {
     copy(copyText);
