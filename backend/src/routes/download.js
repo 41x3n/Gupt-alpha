@@ -7,7 +7,7 @@ const router = express.Router();
 router.get("/api/download/:id", async (req, res) => {
   try {
     const id = req.params.id;
-    // console.log(id);
+    console.log("downloading - ", id);
 
     const fileDetails = await Store.find({ fileKey: id });
     if (fileDetails.length <= 0) res.status(404).send("File Not Found");

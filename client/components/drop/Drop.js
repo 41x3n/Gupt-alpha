@@ -4,21 +4,22 @@ import { useDropzone } from "react-dropzone"; // Import React DropZone
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload, faFile } from "@fortawesome/free-solid-svg-icons";
-
+import _sodium from "libsodium-wrappers";
 import Clipboard from "../clipboard/Clipboard";
 
-import listStyles from "../drop/FileList.module.css";
 import { uploadFileApi } from "../../services/api";
+import listStyles from "../drop/FileList.module.css";
 
 const Drop = () => {
   //Files
   const [myFiles, setMyFiles] = useState([]);
   // const [isUploaded, setIsUploaded] = useState(false);
   const [share, setShare] = useState(false);
-  const [id, setUploadDataId] = useState();
+  const [token, setToken] = useState();
 
   const onDrop = useCallback(
     (acceptedFiles) => {
+      console.log(acceptedFiles);
       setMyFiles([...myFiles, ...acceptedFiles]);
     },
     [myFiles]
@@ -53,21 +54,70 @@ const Drop = () => {
       </button>
     </li>
   ));
+  const generateKeys = (sodium) => {
+    let key = sodium.crypto_box_keypair();
+    let secretKey = key.privateKey;
+    let publicKey = key.publicKey;
+
+    // let nonce = await sodium.randombytes_buf(24);
+
+    return { key, secretKey, publicKey };
+  };
 
   //todo: onSubmit function
   const onSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    myFiles.map((file, index) => {
-      formData.append(`file`, file);
-    });
 
-    let data = await uploadFileApi(formData);
+    let formData = new FormData();
+    await _sodium.ready;
+    let sodium = _sodium;
+
+    let { key, secretKey, publicKey } = generateKeys(sodium);
+
+    let PKBUFFER = sodium.to_hex(publicKey);
+    // console.log({ PKBUFFER });
+
+    let SKBUFFER = sodium.to_hex(secretKey);
+    // console.log({ SKBUFFER });
+
+    await Promise.all(
+      myFiles.map(async (file, index) => {
+        let buffer = await file.arrayBuffer();
+        let unit8View = new Uint8Array(buffer);
+        let plaintext = unit8View;
+
+        let ciphertext = sodium.crypto_box_seal(plaintext, publicKey);
+        console.log(ciphertext);
+
+        let fileName = file.name;
+
+        let CTB64 = sodium.to_base64(ciphertext);
+        console.log(CTB64);
+        let blob = new Blob([CTB64]);
+        console.log(blob);
+
+        let myReader = new FileReader();
+        myReader.onload = function (event) {
+          console.log(JSON.stringify(myReader.result));
+        };
+        myReader.readAsText(blob);
+        formData.append("file", blob, fileName);
+        // console.log(formData);
+      })
+    );
+
+    // console.log(formData);
+
+    let data = await uploadFileApi(formData, {
+      "Content-Type": "multipart/form-data",
+    });
 
     console.log(data);
 
     if (data.length > 0) {
-      setUploadDataId(data);
+      let token = `${data}.${SKBUFFER}.${PKBUFFER}`;
+      console.log(token);
+      setToken(token);
       setShare(true);
     }
   };
@@ -135,7 +185,7 @@ const Drop = () => {
           </div>
         </>
       ) : (
-        <Clipboard id={id} />
+        <Clipboard token={token} />
       )}
     </div>
   );
