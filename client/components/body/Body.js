@@ -1,6 +1,5 @@
 import Drop from "../drop/Drop";
 import FAQ from "../faq/faq";
-//import bodyStyles from '../../styles/Body.module.css';
 const Body = () => {
   return (
     <>
@@ -8,7 +7,6 @@ const Body = () => {
         className="container-fluid py-5"
         style={{
           color: "white",
-          // marginTop: '100px',
           maxWidth: "800px",
         }}
       >

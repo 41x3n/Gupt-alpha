@@ -1,12 +1,10 @@
-import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import copy from "copy-to-clipboard";
-// import FontAwesomeIcon from "@fortawesome/react-fontawesome";
-// import { faCopy } from "@fortawesome/free-solid-svg-icons";
 import Qr from "../qr/Qr";
 
 const Clipboard = ({ token }) => {
   const [copyText, setCopyText] = useState("");
+  const [clicked, setClicked] = useState(false);
 
   useEffect(() => {
     setCopyText(`http://localhost:3000/download/${token}`);
@@ -14,7 +12,7 @@ const Clipboard = ({ token }) => {
 
   const copyToClipboard = () => {
     copy(copyText);
-    alert("Link Copied");
+    setClicked(true);
   };
   return (
     <>
@@ -48,7 +46,7 @@ const Clipboard = ({ token }) => {
               className="btn"
               onClick={copyToClipboard}
             >
-              Copy Link
+              {clicked ? "Copied" : "Copy Link"}
             </button>
           </div>
           <div
@@ -59,7 +57,7 @@ const Clipboard = ({ token }) => {
               margin: "2%",
             }}
           >
-            <Qr />
+            <Qr token={token} />
           </div>
         </div>
       </div>
