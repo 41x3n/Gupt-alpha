@@ -15,9 +15,7 @@ const download = ({ response, filename }) => {
 
   const handleFileDownload = () => {
     let name = fileName.trim();
-    console.log(fileName);
     let file = new File([decrypted], name);
-    console.log(decrypted instanceof Uint8Array);
     FileSaver.saveAs(file, name);
   };
 
@@ -30,9 +28,7 @@ const download = ({ response, filename }) => {
 
       let res = await downloadFileApi(key);
       let filename = res.filename;
-      console.log(filename);
       let data = res.response.data;
-      console.log(res);
 
       let cipherText = sodium.from_base64(data);
 
@@ -41,7 +37,6 @@ const download = ({ response, filename }) => {
       let PBUFFER = sodium.from_hex(publicKey);
 
       decrypted = sodium.crypto_box_seal_open(cipherText, PBUFFER, SBUFFER);
-      console.log(decrypted instanceof Uint8Array);
       setDecrypted(decrypted);
       setFilename(filename);
     }

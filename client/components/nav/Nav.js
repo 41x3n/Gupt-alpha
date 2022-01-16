@@ -8,14 +8,8 @@ const Nav = () => {
         className="navbar navbar-expand-lg row mx-auto"
         style={{ background: "#fff" }}
       >
-        <a className="navbar-brand d-flex justify-content-around px-2" href="#">
-          <Image
-            src="/assets/logo.svg"
-            alt="logo"
-            // className="d-flex"
-            width={50}
-            height={50}
-          />
+        <a className="navbar-brand d-flex justify-content-around px-2" href="/">
+          <Image src="/assets/logo.svg" alt="logo" width={50} height={50} />
           <div className="h1 text m-2" style={{ color: "black" }}>
             GUPT
           </div>

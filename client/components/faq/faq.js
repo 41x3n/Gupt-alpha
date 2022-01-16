@@ -9,22 +9,17 @@ const FAQ = () => {
     {
       id: 1,
       q1: "What is gupt exactly?",
-      a1: "GUPT",
+      a1: "GUPT is an end-to-end file sharing website.",
     },
     {
       id: 2,
-      q1: "What end-to-end encryption?",
-      a1: `E2E`,
+      q1: "What is end-to-end encryption?",
+      a1: `In an end-to-end encryption system, the only people who can access the data are the sender and the intended recipients(s) - and no one else. Neither hackers nor unwanted third parties can access the encrypted data on the server. In true end-to-end encryption, encryption occurs at the device level. That is, messages and files are encrypted before they leave the phone or computer and isn’t decrypted until it reaches its destination. As a result, hackers cannot access data on the server because they do not have the private keys to decrypt the data. Instead, secret keys are stored with the individual user on their device which makes it much harder to access an individual’s data.`,
     },
     {
       id: 3,
       q1: "How can you use gupt?",
-      a1: "EAF",
-    },
-    {
-      id: 4,
-      q1: "Is this another social media app or something?",
-      a1: "Wormhole",
+      a1: "To begin with, you have to choose a file, then upload it. In addition, there will generate a link. Furthermore, You have two options First, you have to copy the generated link and paste it new tab download the file and another option is you have to download the qr code and share it.",
     },
   ];
   return (

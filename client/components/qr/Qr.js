@@ -5,8 +5,8 @@ import QRCode from "qrcode.react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQrcode, faDownload } from "@fortawesome/free-solid-svg-icons";
 
-const ScanQr = () => {
-  const [value, setValue] = useState("http://google.com");
+const ScanQr = ({ token }) => {
+  const [value, setValue] = useState(`http://localhost:3000/download/${token}`);
   const [modalOpen, setModalOpen] = useState(false);
 
   const downloadQR = () => {
@@ -56,16 +56,12 @@ const ScanQr = () => {
             <QRCode
               id="canvas"
               value={value}
-              style={{ width: "200px", height: "200px", marginTop: "150px" }}
+              style={{ width: "200px", height: "200px", marginTop: "50px" }}
             />
             <br />
             <br />
             <button id="download-qr" className="btn" onClick={downloadQR}>
-              <FontAwesomeIcon
-                id="downloadqr-logo"
-                icon={faDownload}
-                style={{ width: "25px", height: "25px" }}
-              />
+              Download
             </button>{" "}
           </>
         </center>

@@ -13,7 +13,6 @@ import listStyles from "../drop/FileList.module.css";
 const Drop = () => {
   //Files
   const [myFiles, setMyFiles] = useState([]);
-  // const [isUploaded, setIsUploaded] = useState(false);
   const [share, setShare] = useState(false);
   const [token, setToken] = useState();
 
@@ -59,8 +58,6 @@ const Drop = () => {
     let secretKey = key.privateKey;
     let publicKey = key.publicKey;
 
-    // let nonce = await sodium.randombytes_buf(24);
-
     return { key, secretKey, publicKey };
   };
 
@@ -75,10 +72,8 @@ const Drop = () => {
     let { key, secretKey, publicKey } = generateKeys(sodium);
 
     let PKBUFFER = sodium.to_hex(publicKey);
-    // console.log({ PKBUFFER });
 
     let SKBUFFER = sodium.to_hex(secretKey);
-    // console.log({ SKBUFFER });
 
     await Promise.all(
       myFiles.map(async (file, index) => {
@@ -87,32 +82,20 @@ const Drop = () => {
         let plaintext = unit8View;
 
         let ciphertext = sodium.crypto_box_seal(plaintext, publicKey);
-        console.log(ciphertext);
 
         let fileName = file.name;
 
         let CTB64 = sodium.to_base64(ciphertext);
-        console.log(CTB64);
-        let blob = new Blob([CTB64]);
-        console.log(blob);
 
-        let myReader = new FileReader();
-        myReader.onload = function (event) {
-          console.log(JSON.stringify(myReader.result));
-        };
-        myReader.readAsText(blob);
+        let blob = new Blob([CTB64]);
+
         formData.append("file", blob, fileName);
-        // console.log(formData);
       })
     );
-
-    // console.log(formData);
 
     let data = await uploadFileApi(formData, {
       "Content-Type": "multipart/form-data",
     });
-
-    console.log(data);
 
     if (data.length > 0) {
       let token = `${data}.${SKBUFFER}.${PKBUFFER}`;
